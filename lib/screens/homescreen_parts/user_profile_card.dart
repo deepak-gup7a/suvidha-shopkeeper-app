@@ -39,7 +39,7 @@ class _UserProfileCardState extends State<UserProfileCard> {
   Widget build(BuildContext context) {
     isSwitched = widget.shopkeeper.available;
     return Card(
-      elevation: 15.0,
+      elevation: 2.0,
       child: Column(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.start,
@@ -192,7 +192,7 @@ class _UserProfileCardState extends State<UserProfileCard> {
                   SizedBox(width: 15),
                   Flexible(
                       flex: 3,
-                      child: Text('${widget.shopkeeper.address}',
+                      child: Text('${widget.shopkeeper.address.split('~')[0]}',
                           maxLines: 2,
                           softWrap: true,
                           overflow: TextOverflow.fade,

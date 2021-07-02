@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:suvidha_shopkeeper/database/shopkeeper_database.dart';
 import 'package:suvidha_shopkeeper/models/constants.dart';
 import 'package:suvidha_shopkeeper/models/shopkeeper.dart';
@@ -16,15 +17,52 @@ class _FormPageState extends State<FormPage> {
 
   final _formKey = GlobalKey<FormState>();
 
+  final Geolocator geolocator = Geolocator()..forceAndroidLocationManager;
+  Position _currentPosition;
+  String _currentAddress;
+
+  _getCurrentLocation() {
+    geolocator
+        .getCurrentPosition(desiredAccuracy: LocationAccuracy.best)
+        .then((Position position) {
+      setState(() {
+        _currentPosition = position;
+      });
+
+      _getAddressFromLatLng();
+    }).catchError((e) {
+      print(e);
+    });
+  }
+
+  _getAddressFromLatLng() async {
+    try {
+      List<Placemark> p = await geolocator.placemarkFromCoordinates(
+          _currentPosition.latitude, _currentPosition.longitude);
+
+      Placemark place = p[0];
+
+      setState(() {
+        _currentAddress =
+        "${place.locality}, ${place.postalCode}, ${place.country}";
+      });
+    } catch (e) {
+      print(e);
+    }
+  }
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    _getCurrentLocation();
     tempShopkeeper = widget.shopkeeper;
+
   }
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
         body: SafeArea(
       child: Center(
@@ -145,6 +183,10 @@ class _FormPageState extends State<FormPage> {
                 ElevatedButton(
                   onPressed: () {
                     if (_formKey.currentState.validate()) {
+                      if(_currentPosition != null){
+                        tempShopkeeper.address = tempShopkeeper.address + '~' + _currentPosition.latitude.toString() + '~' + _currentPosition.longitude.toString();
+                          // print(_currentPosition.toString());
+                      }
                       ShopkeeperDatabase(uid: tempShopkeeper.uid)
                           .updateShopkeeperDatabase(tempShopkeeper);
                       Navigator.pop(context);
