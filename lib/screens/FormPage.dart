@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:suvidha_shopkeeper/database/shopkeeper_database.dart';
@@ -20,6 +21,8 @@ class _FormPageState extends State<FormPage> {
   final Geolocator geolocator = Geolocator()..forceAndroidLocationManager;
   Position _currentPosition;
   String _currentAddress;
+
+
 
   _getCurrentLocation() {
     geolocator
@@ -50,6 +53,10 @@ class _FormPageState extends State<FormPage> {
       print(e);
     }
   }
+  String shopAddress;
+  String shoplang;
+  String shoplat;
+  bool addThisLocation = false;
 
   @override
   void initState() {
@@ -57,6 +64,9 @@ class _FormPageState extends State<FormPage> {
     super.initState();
     _getCurrentLocation();
     tempShopkeeper = widget.shopkeeper;
+    shopAddress = tempShopkeeper.address.split('~')[0];
+    shoplang = tempShopkeeper.address.split('~')[1];
+    shoplat = tempShopkeeper.address.split('~')[2];
 
   }
 
@@ -141,8 +151,8 @@ class _FormPageState extends State<FormPage> {
                     return null;
                   },
                   //enabled: false,
-                  initialValue: widget.shopkeeper.address != null
-                      ? widget.shopkeeper.address
+                  initialValue: shopAddress != null
+                      ? shopAddress
                       : 'Address',
                   decoration: textInputDecoration.copyWith(
                     // hintText: 'Shop Name',
@@ -150,7 +160,7 @@ class _FormPageState extends State<FormPage> {
                   ),
                   onChanged: (val) {
                     setState(() {
-                      tempShopkeeper.address = val;
+                       shopAddress = val;
                     });
                   },
                 ),
@@ -178,14 +188,35 @@ class _FormPageState extends State<FormPage> {
                           )),
                     )),
                 SizedBox(
-                  height: 20,
+                  height: 5,
+                ),
+                MaterialButton(
+                  onPressed: (){
+                    setState(() {
+                      addThisLocation = !addThisLocation;
+                    });
+                  },
+                  child: Container(
+                    color: addThisLocation ? Colors.green[100]: Colors.white,
+                    child: Row(
+                      children: [
+                        Icon(Icons.add_location),
+                        SizedBox(width: 10,),
+                        Text('Add current location as shop location  '),
+                        addThisLocation ? Icon(Icons.done, color: Colors.green,) : Container(),
+                      ],
+                    ),
+                  ),
                 ),
                 ElevatedButton(
                   onPressed: () {
                     if (_formKey.currentState.validate()) {
                       if(_currentPosition != null){
-                        tempShopkeeper.address = tempShopkeeper.address + '~' + _currentPosition.latitude.toString() + '~' + _currentPosition.longitude.toString();
-                          // print(_currentPosition.toString());
+                        if(addThisLocation)
+                          tempShopkeeper.address = shopAddress + '~' + _currentPosition.latitude.toString() + '~' + _currentPosition.longitude.toString();
+                        else
+                          tempShopkeeper.address = shopAddress + '~' + shoplang + '~' + shoplat;
+                        print(_currentPosition.toString());
                       }
                       ShopkeeperDatabase(uid: tempShopkeeper.uid)
                           .updateShopkeeperDatabase(tempShopkeeper);
