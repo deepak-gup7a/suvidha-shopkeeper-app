@@ -13,7 +13,7 @@ class _HistoryCardState extends State<HistoryCard> {
   @override
   Widget build(BuildContext context) {
     return widget.history.length == 0 ? Container(height: 200, child: Center(child: Text('Nothing yet'))) : Card(
-      elevation: 2.5,
+      elevation: 3.5,
       child: ListView.builder(
           physics: NeverScrollableScrollPhysics(),
           shrinkWrap: true,

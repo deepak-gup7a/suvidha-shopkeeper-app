@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:suvidha_shopkeeper/database/request_database.dart';
 import 'package:suvidha_shopkeeper/models/request.dart';
 
+//need to change its elevation and background color
+
 class NewOrderCard extends StatefulWidget {
   List<Request> pendingRequest = [];
   NewOrderCard({this.pendingRequest});
