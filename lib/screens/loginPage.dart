@@ -14,7 +14,7 @@ class _LoginPageState extends State<LoginPage> {
       body: Stack(
         children: [
           Container(
-            padding: EdgeInsets.all(25.0),
+            padding: EdgeInsets.all(24.0),
             decoration: BoxDecoration(),
           ),
           Container(
