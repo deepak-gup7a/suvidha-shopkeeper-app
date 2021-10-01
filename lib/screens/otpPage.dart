@@ -119,7 +119,7 @@ class _OtpCodeVerificationScreenState extends State<OtpCodeVerificationScreen> {
                           style: TextStyle(
                             fontFamily: 'ReggaeOne',
                             fontWeight: FontWeight.bold,
-                            fontSize: 40,
+                            fontSize: 38,
                             // fontFamily:'dsc',
                             //color: Colors.white,
                           ),
