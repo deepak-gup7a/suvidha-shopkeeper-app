@@ -14,7 +14,7 @@ class _CurrentOrderCardState extends State<CurrentOrderCard> {
   @override
   Widget build(BuildContext context) {
     return widget.current.length == 0 ? Container(height: 200, child: Center(child: Text('Nothing yet'))) : Card(
-      elevation: 3.5,
+      elevation: 2.5,
       child: ListView.builder(
           physics: NeverScrollableScrollPhysics(),
           shrinkWrap: true,
@@ -30,7 +30,7 @@ class _CurrentOrderCardState extends State<CurrentOrderCard> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Padding(
-                  padding: const EdgeInsets.all(3.0),
+                  padding: const EdgeInsets.all(2.0),
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Column(
