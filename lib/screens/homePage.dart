@@ -14,7 +14,7 @@ class Home extends StatefulWidget {
   @override
   _HomeState createState() => _HomeState();
 }
-
+//in HF
 //in the name of HF2021
 class _HomeState extends State<Home> {
 
@@ -41,9 +41,11 @@ class _HomeState extends State<Home> {
         if (r.status == "STATUS_PENDING") {
           pendingRequest.add(r);
         }
+        
         if (r.status == "STATUS_ACCEPTED") {
           current.add(r);
         }
+        //status
         if (r.status == "STATUS_COMPLETED" || r.status == "STATUS_REJECTED") {
           history.add(r);
         }
@@ -55,7 +57,7 @@ class _HomeState extends State<Home> {
         child: SingleChildScrollView(
           physics: ScrollPhysics(),
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(10.0),
             child: Column(
               children: [
                 UserProfileCard(
