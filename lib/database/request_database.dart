@@ -2,8 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:suvidha_shopkeeper/models/request.dart';
 
 class RequestDatabase {
-  final CollectionReference collectionReference =
-      FirebaseFirestore.instance.collection('request');
+  // collection references to firebase
+  final CollectionReference collectionReference =FirebaseFirestore.instance.collection('request');
 
   Future acceptRequest(
       String uid, String status, int expectedTime, String acceptTime) async {
@@ -14,12 +14,14 @@ class RequestDatabase {
     });
   }
 
+  // order driver
   Future orderDelivered(String uid, String status) async {
     await collectionReference.doc(uid).update({
       "status": status,
     });
   }
 
+  // request rejection
   Future rejectRequest(
       String uid, String status, String error, String acceptTime) async {
     await collectionReference
