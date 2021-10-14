@@ -29,9 +29,9 @@ class _LoginPageState extends State<LoginPage> {
                       'SUVIDHA',
                       style: TextStyle(
                         fontFamily: 'ReggaeOne',
-                        fontSize: 45,
+                        fontSize: 48,
                         //color: Colors.white,
-                        fontWeight: FontWeight.w900,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                     Text(
@@ -62,7 +62,7 @@ class _LoginPageState extends State<LoginPage> {
                                 'Your Phone!',
                                 // textAlign: TextAlign.start,
                                 style: TextStyle(
-                                  fontSize: 35,
+                                  fontSize: 38,
                                   fontWeight: FontWeight.bold,
                                   fontFamily: "BreeSerif",
                                 ),
