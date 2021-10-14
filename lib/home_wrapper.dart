@@ -22,7 +22,7 @@ class _HomeWrapperState extends State<HomeWrapper> {
         ),
         StreamProvider.value(
             value: RequestDatabase().request,
-            initialData: null)
+            initialData: user??null)
       ],
       child: Home(),
     );
