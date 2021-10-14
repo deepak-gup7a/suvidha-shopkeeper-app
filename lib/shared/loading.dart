@@ -6,7 +6,7 @@ class Loading extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        //color: Colors.pink[100],
+        color: Colors.pink[200],
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -25,7 +25,7 @@ class Loading extends StatelessWidget {
                   style: TextStyle(
                     fontFamily: 'ReggaeOne',
                     fontSize: 25,
-                    //color: Colors.white,
+                    color: Colors.white,
                   ),
                 ),
               ],
